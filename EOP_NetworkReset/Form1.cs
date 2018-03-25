@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
+using System.Net.Sockets;
 
 namespace EOP_NetworkReset
 {
@@ -22,6 +24,11 @@ namespace EOP_NetworkReset
 
             private void FrmMain_Load(object sender, EventArgs e)
             {
+                IPAddress gatewayip;
+
+                gatewayip = GetDefaultGateway();
+                textBox1.Text = gatewayip.ToString();
+
                 textBox1.Enabled = false;
                 toolStripStatusLabel1.Text = "Error Count: 0";
             }
@@ -83,6 +90,7 @@ namespace EOP_NetworkReset
             {
                 textBox1.Enabled = false;
                 textBox1.Update();
+                label1.Text = "Starting";
                 timer1.Enabled = true;
             }
 
@@ -90,8 +98,23 @@ namespace EOP_NetworkReset
             {
                 textBox1.Enabled = true;
                 textBox1.Update();
+                label1.Text = "Stopped";
                 timer1.Enabled = false;
             }
+        }
+
+        public static IPAddress GetDefaultGateway()
+        {
+            return NetworkInterface
+                .GetAllNetworkInterfaces()
+                .Where(n => n.OperationalStatus == OperationalStatus.Up)
+                .Where(n => n.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+                .SelectMany(n => n.GetIPProperties()?.GatewayAddresses)
+                .Select(g => g?.Address)
+                .Where(a => a != null)
+                .Where(a => a.AddressFamily == AddressFamily.InterNetwork)
+                // .Where(a => Array.FindIndex(a.GetAddressBytes(), b => b != 0) >= 0)
+                .FirstOrDefault();
         }
     }
 
