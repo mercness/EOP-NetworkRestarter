@@ -8,3 +8,4 @@ D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\bin\Debug\EOP_NetworkReset.exe
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\bin\Debug\EOP_NetworkReset.pdb
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.exe
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.pdb
+D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.FrmWarningsLog.resources
