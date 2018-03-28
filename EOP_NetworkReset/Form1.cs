@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using Microsoft.Win32;
 
 namespace EOP_NetworkReset
 {
@@ -33,6 +34,8 @@ namespace EOP_NetworkReset
                 toolStripStatusLabel4.Text = "Warning Count: 0";
                 toolStripStatusLabel5.Text = "Version: "+Application.ProductVersion.ToString();
 
+                timer1.Interval = StaticValues.PollingTimeMs;
+
             List<string> list = new List<string>();
                         NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
                         foreach (NetworkInterface adapter in adapters)
@@ -55,6 +58,9 @@ namespace EOP_NetworkReset
             public static int Pingnumber { get; set; }
             public static int WarningCount { get; set; }
             public static List<string> Warnings = new List<string>();
+
+            public static int PollingTimeMs = Convert.ToInt32(Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Wow6432Node\NetworkReset", "PollingTimeMs", "1000"));
+            public static int WarningLowerLimitMs = Convert.ToInt32(Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Wow6432Node\NetworkReset", "WarningLowerLimitMs", "50"));
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -74,7 +80,7 @@ namespace EOP_NetworkReset
                         label1.Text = "Ping to " + s.ToString() + " Successful"
                                         + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n";
                         // trigger a warning
-                        if (r.RoundtripTime > 50)
+                        if (r.RoundtripTime > StaticValues.WarningLowerLimitMs)
                 {
                     StaticValues.WarningCount = StaticValues.WarningCount + 1;
                     toolStripStatusLabel4.Text = "Warning Count: " + StaticValues.WarningCount;
@@ -156,6 +162,12 @@ namespace EOP_NetworkReset
         {
             FrmWarningsLog frmWarnings = new FrmWarningsLog();
             frmWarnings.Show();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSettings formSettings = new FormSettings();
+            formSettings.Show();
         }
     }
 

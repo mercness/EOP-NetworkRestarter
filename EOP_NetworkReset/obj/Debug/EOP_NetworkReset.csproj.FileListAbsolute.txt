@@ -12,3 +12,4 @@ D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\bin\Debug\EOP_NetworkReset.exe.man
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\bin\Debug\EOP_NetworkReset.application
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.exe.manifest
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.application
+D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.FormSettings.resources
