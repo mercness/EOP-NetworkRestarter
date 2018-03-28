@@ -1,0 +1,7 @@
+Ping #: 20 - 74 ms
+Ping #: 117 - 462 ms
+Ping #: 144 - 1800 ms
+Ping #: 241 - 455 ms
+Ping #: 268 - 320 ms
+Ping #: 365 - 440 ms
+Ping #: 392 - 154 ms
