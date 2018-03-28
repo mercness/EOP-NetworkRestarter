@@ -1,4 +1,3 @@
-D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.csprojResolveAssemblyReference.cache
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.FrmMain.resources
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.Properties.Resources.resources
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.csproj.GenerateResource.cache
@@ -9,3 +8,7 @@ D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\bin\Debug\EOP_NetworkReset.pdb
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.exe
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.pdb
 D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.FrmWarningsLog.resources
+D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\bin\Debug\EOP_NetworkReset.exe.manifest
+D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\bin\Debug\EOP_NetworkReset.application
+D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.exe.manifest
+D:\Code\EOP\EOP_NetworkReset\EOP_NetworkReset\obj\Debug\EOP_NetworkReset.application

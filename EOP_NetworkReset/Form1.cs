@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.NetworkInformation;
-using System.Threading;
 using System.Net.Sockets;
 
 namespace EOP_NetworkReset
@@ -60,7 +55,6 @@ namespace EOP_NetworkReset
             public static int Pingnumber { get; set; }
             public static int WarningCount { get; set; }
             public static List<string> Warnings = new List<string>();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -76,8 +70,6 @@ namespace EOP_NetworkReset
 
                         s = textBox1.Text;
                         r = p.Send(s);
-                        //label1.Text = "Ping to " + s.ToString() + "[" + r.Address.ToString() + "]" + " Successful"
-                        //                 + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n";
 
                         label1.Text = "Ping to " + s.ToString() + " Successful"
                                         + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n";

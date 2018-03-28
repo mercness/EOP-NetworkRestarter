@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.ListBoxWarnings = new System.Windows.Forms.ListBox();
+            this.ButtonSaveToFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ListBoxWarnings
@@ -39,11 +40,22 @@
             this.ListBoxWarnings.Size = new System.Drawing.Size(329, 420);
             this.ListBoxWarnings.TabIndex = 0;
             // 
+            // ButtonSaveToFile
+            // 
+            this.ButtonSaveToFile.Location = new System.Drawing.Point(266, 438);
+            this.ButtonSaveToFile.Name = "ButtonSaveToFile";
+            this.ButtonSaveToFile.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSaveToFile.TabIndex = 1;
+            this.ButtonSaveToFile.Text = "Save to File";
+            this.ButtonSaveToFile.UseVisualStyleBackColor = true;
+            this.ButtonSaveToFile.Click += new System.EventHandler(this.ButtonSaveToFile_Click);
+            // 
             // FrmWarningsLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 450);
+            this.ClientSize = new System.Drawing.Size(353, 470);
+            this.Controls.Add(this.ButtonSaveToFile);
             this.Controls.Add(this.ListBoxWarnings);
             this.Name = "FrmWarningsLog";
             this.Text = "Warnings Log";
@@ -55,5 +67,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox ListBoxWarnings;
+        private System.Windows.Forms.Button ButtonSaveToFile;
     }
 }
