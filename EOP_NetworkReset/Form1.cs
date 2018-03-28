@@ -29,17 +29,24 @@ namespace EOP_NetworkReset
 
                 gatewayip = GetDefaultGateway();
                 textBox1.Text = gatewayip.ToString();
-                StaticValues.error_count = 0;
-                StaticValues.pingnumber = 0;
+                StaticValues.Error_count = 0;
+                StaticValues.Pingnumber = 0;
+                StaticValues.WarningCount = 0;
 
                 textBox1.Enabled = false;
                 toolStripStatusLabel1.Text = "Error Count: 0";
+                toolStripStatusLabel4.Text = "Warning Count: 0";
+                toolStripStatusLabel5.Text = "Version: "+Application.ProductVersion.ToString();
 
                     List<string> list = new List<string>();
                         NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
                         foreach (NetworkInterface adapter in adapters)
                             {
-                                list.Add(adapter.Description);
+                                if (adapter.Description != "Software Loopback Interface 1" & adapter.Description != "Teredo Tunneling Pseudo-Interface")
+                                {
+                                    list.Add(adapter.Description);
+                                }
+                                
                             }
 
             comboBox1.DataSource = list;
@@ -48,15 +55,16 @@ namespace EOP_NetworkReset
 
         public static class StaticValues
         {
-            public static int error_count { get; set; }
-            public static int pingnumber { get; set; }
+            public static int Error_count { get; set; }
+            public static int Pingnumber { get; set; }
+            public static int WarningCount { get; set; }
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
 
-            toolStripStatusLabel1.Text = "Error Count: "+StaticValues.error_count.ToString();
+            toolStripStatusLabel1.Text = "Error Count: "+StaticValues.Error_count.ToString();
 
             try
                     {
@@ -66,28 +74,31 @@ namespace EOP_NetworkReset
 
                         s = textBox1.Text;
                         r = p.Send(s);
-                        label1.Text = "Ping to " + s.ToString() + "[" + r.Address.ToString() + "]" + " Successful"
-                                         + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n";
+                        //label1.Text = "Ping to " + s.ToString() + "[" + r.Address.ToString() + "]" + " Successful"
+                        //                 + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n";
 
+                        label1.Text = "Ping to " + s.ToString() + " Successful"
+                                        + " Response delay = " + r.RoundtripTime.ToString() + " ms" + "\n";
+                        // trigger a warning
+                        if (r.RoundtripTime > 50)
+                {
+                    StaticValues.WarningCount = StaticValues.WarningCount + 1;
+                    toolStripStatusLabel4.Text = "Warning Count: " + StaticValues.WarningCount;
+                }
 
-                        //List<string> pingms = new List<string>();
-                        //{
-                        //    pingms.Add(r.RoundtripTime.ToString());
-                        //}
-
-                
-                chart1.Series["Ping"].Points.AddXY(StaticValues.pingnumber.ToString(), r.RoundtripTime.ToString());
-                StaticValues.pingnumber = StaticValues.pingnumber + 1;
+                // Add ping values to chart
+                chart1.Series["Ping"].Points.AddXY(StaticValues.Pingnumber.ToString(), r.RoundtripTime.ToString());
+                StaticValues.Pingnumber = StaticValues.Pingnumber + 1;
 
             }
                 catch (PingException)
                     {
 
                 // increase error count by 1, update the count on screen, show  message, stop the timer
-                        StaticValues.error_count = StaticValues.error_count + 1;
+                        StaticValues.Error_count = StaticValues.Error_count + 1;
                         timer1.Enabled = false;
                         checkBox1.Checked = false;
-                        toolStripStatusLabel1.Text = "Error Count: " + StaticValues.error_count.ToString();
+                        toolStripStatusLabel1.Text = "Error Count: " + StaticValues.Error_count.ToString();
                         DialogResult pingerror = MessageBox.Show("Should we restart NIC?","Unable to ping "+textBox1.Text, MessageBoxButtons.YesNo);
 
                             if (pingerror == DialogResult.Yes)
