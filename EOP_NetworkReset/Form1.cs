@@ -38,7 +38,7 @@ namespace EOP_NetworkReset
                 toolStripStatusLabel4.Text = "Warning Count: 0";
                 toolStripStatusLabel5.Text = "Version: "+Application.ProductVersion.ToString();
 
-                    List<string> list = new List<string>();
+            List<string> list = new List<string>();
                         NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
                         foreach (NetworkInterface adapter in adapters)
                             {
@@ -50,7 +50,8 @@ namespace EOP_NetworkReset
                             }
 
             comboBox1.DataSource = list;
-
+            chart1.ChartAreas["ChartArea1"].AxisY.Title = "ms Response";
+            chart1.ChartAreas["ChartArea1"].AxisX.Title = "Ping #";
         }
 
         public static class StaticValues
@@ -58,6 +59,7 @@ namespace EOP_NetworkReset
             public static int Error_count { get; set; }
             public static int Pingnumber { get; set; }
             public static int WarningCount { get; set; }
+            public static List<string> Warnings = new List<string>();
 
         }
 
@@ -84,6 +86,7 @@ namespace EOP_NetworkReset
                 {
                     StaticValues.WarningCount = StaticValues.WarningCount + 1;
                     toolStripStatusLabel4.Text = "Warning Count: " + StaticValues.WarningCount;
+                    StaticValues.Warnings.Add("Ping #: "+StaticValues.Pingnumber.ToString() +" - " + r.RoundtripTime.ToString()+ " ms");
                 }
 
                 // Add ping values to chart
@@ -155,6 +158,12 @@ namespace EOP_NetworkReset
                 .Where(a => a.AddressFamily == AddressFamily.InterNetwork)
                 // .Where(a => Array.FindIndex(a.GetAddressBytes(), b => b != 0) >= 0)
                 .FirstOrDefault();
+        }
+
+        private void toolStripStatusLabel4_Click(object sender, EventArgs e)
+        {
+            FrmWarningsLog frmWarnings = new FrmWarningsLog();
+            frmWarnings.Show();
         }
     }
 
